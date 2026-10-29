@@ -8,14 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0e0c;
-            --surface-color: #141916;
-            --text-main: #f4f7f5;
-            --text-muted: #85968d;
+            --bg-color: #0c0f0e;
+            --surface-color: #161c18;
+            --text-main: #f0f4f1;
+            --text-muted: #829489;
             --accent-green: #39ff14; /* Y2K 螢光綠 */
-            --accent-silver: #a3b1a8;
-            --border-y2k: #2a3830;
-            --window-header: #1e2621;
+            --accent-cyan: #00f0ff;  /* Y2K 晶體藍 */
+            --accent-silver: #c2cbd5;
+            --border-y2k: #2a3b31;
+            --window-header: #1e2822;
         }
 
         * {
@@ -34,18 +35,23 @@
             justify-content: space-between;
             padding: 2rem;
             position: relative;
-            overflow-x: hidden;
         }
 
-        /* 乾淨的 Y2K 點陣背景 */
-        body::before {
-            content: "";
+        /* Y2K 網格底紋 (確保 pointer-events 為 none 絕不干擾點擊) */
+        .grid-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(57, 255, 20, 0.08) 1px, transparent 0);
-            background-size: 24px 24px;
+            background-image: 
+                linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+            background-size: 32px 32px;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
+        }
+
+        header, main, footer {
+            position: relative;
+            z-index: 10;
         }
 
         header {
@@ -55,15 +61,14 @@
             border: 1px solid var(--border-y2k);
             padding: 1rem 1.5rem;
             background: var(--surface-color);
-            position: relative;
-            z-index: 10;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         .logo-tag {
             font-family: 'Plus Jakarta Sans', monospace;
             font-size: 0.85rem;
             letter-spacing: 0.15em;
-            color: var(--accent-silver);
+            color: var(--accent-cyan);
             text-transform: uppercase;
         }
 
@@ -80,22 +85,18 @@
         main {
             max-width: 720px;
             width: 100%;
-            margin: 2.5rem auto;
+            margin: 3rem auto;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            position: relative;
-            z-index: 10;
         }
 
-        /* 仿 Y2K 視窗容器 */
+        /* Y2K 復古金屬視窗 */
         .win95-window {
             background: var(--surface-color);
             border: 2px solid var(--accent-silver);
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.9);
-            position: relative;
-            z-index: 10;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.05);
         }
 
         .win95-titlebar {
@@ -104,7 +105,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-y2k);
+            border-bottom: 2px solid var(--border-y2k);
             font-family: 'Plus Jakarta Sans', monospace;
             font-size: 0.8rem;
             color: var(--accent-silver);
@@ -127,6 +128,7 @@
             padding: 3rem 2.5rem;
         }
 
+        /* 頁面切換控制 */
         .page {
             display: none;
         }
@@ -138,7 +140,7 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -150,4 +152,4 @@
             margin-bottom: 1.5rem;
             color: #fff;
             letter-spacing: -0.01em;
-            text-shadow: 0 0
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
