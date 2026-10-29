@@ -8,15 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0c0f0e;
-            --surface-color: #161c18;
-            --text-main: #f0f4f1;
-            --text-muted: #829489;
+            --bg-color: #060807;
+            --surface-color: #101512;
+            --text-main: #f4f7f5;
+            --text-muted: #7d9085;
             --accent-green: #39ff14; /* Y2K 螢光綠 */
-            --accent-cyan: #00f0ff;  /* Y2K 晶體藍 */
-            --accent-silver: #c2cbd5;
-            --border-y2k: #2a3b31;
-            --window-header: #1e2822;
+            --accent-cyan: #00f0ff;  /* Y2K 霓虹藍 */
+            --border-y2k: #223328;
+            --window-header: #18241d;
         }
 
         * {
@@ -37,14 +36,14 @@
             position: relative;
         }
 
-        /* Y2K 網格底紋 (確保 pointer-events 為 none 絕不干擾點擊) */
-        .grid-bg {
+        /* 絕對不干擾點擊的網格背景 */
+        .cyber-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
-            background-size: 32px 32px;
+                linear-gradient(rgba(57, 255, 20, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
             pointer-events: none;
             z-index: 1;
         }
@@ -58,10 +57,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid var(--border-y2k);
+            border: 2px solid var(--border-y2k);
             padding: 1rem 1.5rem;
             background: var(--surface-color);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
         }
 
         .logo-tag {
@@ -79,7 +78,7 @@
             font-size: 0.75rem;
             font-family: 'Plus Jakarta Sans', monospace;
             border: 1px solid var(--accent-green);
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            box-shadow: 0 0 12px rgba(57, 255, 20, 0.4);
         }
 
         main {
@@ -92,39 +91,39 @@
             justify-content: center;
         }
 
-        /* Y2K 復古金屬視窗 */
-        .win95-window {
+        /* Y2K 復古重工業視窗 */
+        .y2k-window {
             background: var(--surface-color);
-            border: 2px solid var(--accent-silver);
-            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.05);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 240, 255, 0.1);
         }
 
-        .win95-titlebar {
+        .y2k-titlebar {
             background: var(--window-header);
-            padding: 0.6rem 1rem;
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--border-y2k);
+            border-bottom: 2px solid var(--accent-cyan);
             font-family: 'Plus Jakarta Sans', monospace;
-            font-size: 0.8rem;
-            color: var(--accent-silver);
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
         }
 
-        .win95-buttons span {
+        .y2k-window-buttons span {
             display: inline-block;
             width: 14px;
             height: 14px;
             background: var(--border-y2k);
-            margin-left: 4px;
-            border: 1px solid var(--accent-silver);
+            margin-left: 6px;
+            border: 1px solid var(--accent-cyan);
             text-align: center;
             line-height: 12px;
-            font-size: 10px;
+            font-size: 9px;
             cursor: pointer;
         }
 
-        .win95-body {
+        .y2k-body {
             padding: 3rem 2.5rem;
         }
 
@@ -136,11 +135,11 @@
         .page.active {
             display: flex;
             flex-direction: column;
-            animation: fadeIn 0.3s ease forwards;
+            animation: glitchFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+        @keyframes glitchFade {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -152,4 +151,470 @@
             margin-bottom: 1.5rem;
             color: #fff;
             letter-spacing: -0.01em;
-            text-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .slogan-box {
+            font-family: 'Plus Jakarta Sans', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+            background: rgba(57, 255, 20, 0.05);
+            border-left: 3px solid var(--accent-green);
+            padding: 0.8rem 1rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--accent-green);
+            color: #000;
+            font-family: 'Plus Jakarta Sans', monospace;
+            font-size: 0.95rem;
+            font-weight: 800;
+            padding: 1rem 2.5rem;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            width: fit-content;
+            box-shadow: 4px 4px 0px var(--accent-cyan);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-cyan);
+            color: #000;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--accent-green);
+        }
+
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.9);
+        }
+
+        /* 題目與選項 */
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-y2k);
+            padding-bottom: 0.75rem;
+        }
+
+        .q-progress {
+            font-family: 'Plus Jakarta Sans', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+        }
+
+        .q-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background-color: #080c0a;
+            border: 2px solid var(--border-y2k);
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            font-size: 1rem;
+            font-family: 'Noto Sans TC', sans-serif;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent-cyan);
+            background-color: rgba(0, 240, 255, 0.05);
+            transform: translateX(4px);
+            box-shadow: 6px 6px 0px rgba(0, 240, 255, 0.2);
+        }
+
+        .option-tag {
+            font-family: 'Plus Jakarta Sans', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* 結果頁 */
+        .result-eyebrow {
+            font-family: 'Plus Jakarta Sans', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .result-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 0.25rem 0.75rem;
+            font-family: 'Plus Jakarta Sans', monospace;
+        }
+
+        .result-desc {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed var(--border-y2k);
+            padding-bottom: 1.5rem;
+        }
+
+        .quote-box {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #fff;
+            background: #080c0a;
+            padding: 1.5rem;
+            border-left: 3px solid var(--accent-cyan);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--text-muted);
+            color: var(--text-main);
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-main);
+            color: #000;
+            box-shadow: 6px 6px 0px var(--accent-cyan);
+        }
+
+        footer {
+            margin-top: 2rem;
+            border: 2px solid var(--border-y2k);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'Plus Jakarta Sans', monospace;
+            background: var(--surface-color);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .y2k-body { padding: 1.5rem 1rem; }
+            .result-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-grid"></div>
+
+    <header>
+        <div class="logo-tag">SAKE_STUDIO // SYS.01</div>
+        <div class="status-badge" id="status-text">[STATUS: READY]</div>
+    </header>
+
+    <main>
+        <div class="y2k-window">
+            <div class="y2k-titlebar">
+                <span>MOCHI_ANALYZER.EXE</span>
+                <div class="y2k-window-buttons">
+                    <span>_</span><span>□</span><span>×</span>
+                </div>
+            </div>
+            <div class="y2k-body">
+                <!-- 1. 首頁 -->
+                <div id="page-home" class="page active">
+                    <h1 class="hero-title">如果我是一顆麻糬？</h1>
+                    <p class="hero-subtitle">關於韌性、溫度與形狀的當代心理測驗。<br>在被生活揉捏的日子裡，你的靈魂是什麼質地？</p>
+                    <div class="slogan-box">> # 找到屬於你的生活Q度。</div>
+                    <button class="btn" onclick="startQuiz()">開始測驗 [START] →</button>
+                </div>
+
+                <!-- 2. 作答頁 -->
+                <div id="page-quiz" class="page">
+                    <div class="question-header">
+                        <span class="logo-tag" id="q-category">SCENARIO 01</span>
+                        <span class="q-progress" id="q-counter">01 / 05</span>
+                    </div>
+                    <h2 class="q-title" id="q-title-text">載入中...</h2>
+                    <div class="options-list" id="options-container">
+                        <!-- 動態生成選項 -->
+                    </div>
+                </div>
+
+                <!-- 3. 結果頁 -->
+                <div id="page-result" class="page">
+                    <div class="result-eyebrow">>> YOUR MOCHI ARCHETYPE</div>
+                    <h1 class="result-title" id="res-name">草莓大福</h1>
+                    <div class="result-tags" id="res-tags">
+                        <span class="tag">#俐落</span>
+                        <span class="tag">#微酸</span>
+                        <span class="tag">#外冷內韌</span>
+                    </div>
+                    <p class="result-desc" id="res-desc">薄皮包裹完整果實，微酸與清甜交織，冰涼且帶有層次。外表俐落、帶點清冷的高級感，但內心其實藏著一顆柔軟的心。</p>
+                    <blockquote class="quote-box" id="res-quote">
+                        「把邊界感拉得剛剛好，是為了好好保護內心那顆最新鮮的果實。」
+                    </blockquote>
+                    <div class="result-actions">
+                        <button class="btn" onclick="restartQuiz()">重新測驗 ↺</button>
+                        <button class="btn btn-outline" onclick="alert('已複製結果摘要，歡迎截圖分享至 Instagram 限時動態！')">📋 儲存測驗卡片</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>LOC: TAIWAN // TEXTURE_LAB</div>
+        <div>DESIGNED BY SAKE</div>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                category: "SCENARIO 01 / 通勤空間",
+                title: "當週五傍晚下班，捷運車廂異常擁擠時，你的身體與意識會自動進入哪種狀態？",
+                options: [
+                    { text: "核心收緊：像剛從蒸籠拿出來那般紮實，任憑人潮擠壓，外型絕對不變形。", type: "mochi-3" },
+                    { text: "隨波搖晃：順著車廂晃動的頻率擺動，把四周的喧鬧當成流動的背景音樂。", type: "mochi-10" },
+                    { text: "退守邊陲：默默縮在車門旁的角落，降低所有身體與視覺的接觸面積。", type: "mochi-5" },
+                    { text: "觀景模式：冷眼觀察周遭疲憊的面孔與穿搭，心裡默默寫起城市小短劇。", type: "mochi-1" }
+                ]
+            },
+            {
+                category: "SCENARIO 02 / 人際邊界",
+                title: "面對突如其來的跨部門協作或陌生局，你的「防護罩」通常是什麼材質？",
+                options: [
+                    { text: "不鏽鋼板：公事公辦，邊界感清晰，水潑不進。", type: "mochi-1" },
+                    { text: "細緻蠶絲：外表柔軟但韌性極高，怎麼拉扯都不會斷裂。", type: "mochi-2" },
+                    { text: "氣泡緩衝布：看似好親近，但其實與所有人保持著一毫米的緩衝距離。", type: "mochi-4" },
+                    { text: "微溫磁場：頻率對了就瞬間靠近，頻率不對就保持剛剛好的禮貌。", type: "mochi-3" }
+                ]
+            },
+            {
+                category: "SCENARIO 03 / 內在安全感",
+                title: "如果用一種台灣街頭常見的氣味，來形容你內在的真實安全感，會是？",
+                options: [
+                    { text: "剛蒸好的花生粉香氣：溫暖、紮實、帶有厚度與記憶點。", type: "mochi-3" },
+                    { text: "青草茶店的微苦回甘：清醒、冷靜、帶點草本調的餘韻。", type: "mochi-5" },
+                    { text: "雨後柏油路的潮濕氣味：都會、孤獨、充滿冷調的自由。", type: "mochi-6" },
+                    { text: "炭火烘烤的微焦氣味：經過高溫淬煉後，散發出的成熟大人風味。", type: "mochi-10" }
+                ]
+            },
+            {
+                category: "SCENARIO 04 / 壓力消化",
+                title: "當生活連續給了你幾記悶棍、讓你感到疲憊不堪時，你習慣的消化方式是？",
+                options: [
+                    { text: "放進冷凍庫：先把自己冰鎮起來，阻絕外界刺激，等過陣子自然解凍。", type: "mochi-1" },
+                    { text: "放進滾水中加熱：選擇直面問題，泡個熱水澡或大吃一頓，讓自己重新軟化。", type: "mochi-2" },
+                    { text: "融入日常茶水：不特別宣揚，像茶葉泡在水裡一樣，讓苦澀慢慢釋放、變淡。", type: "mochi-5" },
+                    { text: "加入大量配料：找朋友聚在一起，用熱鬧的油蔥酥與熱湯，把不開心煮成一鍋團圓。", type: "mochi-8" }
+                ]
+            },
+            {
+                category: "SCENARIO 05 / 社交距離",
+                title: "對你而言，人與人之間最舒服的距離感，應該像什麼狀態？",
+                options: [
+                    { text: "完美包覆：外皮把內餡緊緊包裹住，不露痕跡，卻有無比的安全感。", type: "mochi-6" },
+                    { text: "各自獨立：不一定要混在一起，像茶與水一樣，相遇時融洽，分開時清爽。", type: "mochi-5" },
+                    { text: "溫熱交融：在特定時刻緊緊相依，溫度冷卻後各自安好，不勉強維持熱度。", type: "mochi-2" },
+                    { text: "層層疊放：像鏡餅一樣，各有各的份量與位置，靜靜立在那裡就是一種守望。", type: "mochi-9" }
+                ]
+            }
+        ];
+
+        const mochiTypes = {
+            "mochi-1": {
+                name: "草莓大福",
+                tags: ["#俐落", "#微酸", "#外冷內韌"],
+                desc: "薄皮包裹完整果實，微酸與清甜交織，冰涼且帶有層次。外表俐落、帶點清冷的高級感，但內心其實藏著一顆柔軟的心。",
+                quote: "「把邊界感拉得剛剛好，是為了好好保護內心那顆最新鮮的果實。」"
+            },
+            "mochi-2": {
+                name: "燒麻糬",
+                tags: ["#外冷內熱", "#濃烈", "#需要溫度"],
+                desc: "在滾水中翻滾後變得極度柔軟，上桌時冒著熱氣，沾滿大量花生或芝麻粉，必須趁熱享用。外冷內熱的極致，一旦被溫熱就會展現無比真誠。",
+                quote: "「需要時間加熱的靈魂，一旦熟了，就比誰都還要真誠。」"
+            },
+            "mochi-3": {
+                name: "手工麻糬 - 花生",
+                tags: ["#經典", "#溫潤", "#接地氣"],
+                desc: "傳統攤車現捏，軟糯的外皮裹滿粗顆粒的花生糖粉，樸實無華卻香氣直衝腦門。你是團體裡最具安全感的存在，沒有架子。",
+                quote: "「人生海海，著愛保持一點Q度。外表樸實沒關係，餡料實在才是真功夫。」"
+            },
+            "mochi-4": {
+                name: "手工麻糬 - 芝麻",
+                tags: ["#內斂", "#深邃", "#思考者"],
+                desc: "深色內餡濃郁飽滿，一口咬下，濃烈的芝麻香氣在口中化開，沉穩而深邃。不喜歡張揚，但肚子裡非常有墨水，是最佳傾聽者。",
+                quote: "「越是深沉的靈魂，越懂得把甜留在最核心的地方。」"
+            },
+            "mochi-5": {
+                name: "茶味無餡料麻糬",
+                tags: ["#極簡", "#清爽", "#回甘"],
+                desc: "純粹的茶香融入糯米，不靠過多甜味掩飾，咀嚼後滿口回甘。追求精神上的清爽與獨立，不需要過多的社交包裝。",
+                quote: "「不靠花俏的內餡搶戲，時間會回甘，懂的人就懂。」"
+            },
+            "mochi-6": {
+                name: "抹茶紅豆大福",
+                tags: ["#大人味", "#完美主義", "#細緻"],
+                desc: "帶有大人感的微苦抹茶外皮，包裹著綿密不死甜的紅豆泥，風味細緻。外表冷靜沉著，內心卻有著豐富且濃烈的情感世界。",
+                quote: "「微苦是大人的滋味，而甜，留給懂的人細細品嘗。」"
+            },
+            "mochi-7": {
+                name: "萩餅（牡丹餅）",
+                tags: ["#念舊", "#手作感", "#節氣溫度"],
+                desc: "外層裹著粗略壓碎的紅豆泥或黃豆粉，看得見米粒的粗獷質地，充滿手作溫度。不追求過度精緻的完美，更喜歡生活中自然流露的樸實。",
+                quote: "「不用修飾掉所有的稜角，那正是生活留下的痕跡。」"
+            },
+            "mochi-8": {
+                name: "客家鹹湯圓",
+                tags: ["#局中核心", "#重情", "#照顧者"],
+                desc: "雖然名字帶圓，但在口感上與麻糬同源，經得起大火滾煮與油蔥酥的洗禮。身上帶有一種「有我在，大家就不用擔心」的強大可靠氣場。",
+                quote: "「有我在的地方，就是圓滿。把日常的擔當，煮成一碗熱呼呼的團聚。」"
+            },
+            "mochi-9": {
+                name: "鏡餅（神麻糬）",
+                tags: ["#定海神針", "#精神領袖", "#儀式感"],
+                desc: "層疊的圓形象徵圓滿，靜靜立在顯眼處承載祈願。平常不疾不徐，但在關鍵時刻總能帶來沉穩的凝聚力與儀式感。",
+                quote: "「靜靜立在那裡，就是一種祝福與錨定。」"
+            },
+            "mochi-10": {
+                name: "烤麻糬",
+                tags: ["#熱血", "#行動派", "#外酥內軟"],
+                desc: "在炭火上慢慢膨脹、表皮微焦，刷上醬油或煉乳，外酥內軟。經過高溫考驗後，反而能展現出最獨特的酥脆口感與迷人風味。",
+                quote: "「生活給的高溫，只會讓我膨脹得更漂亮。」"
+            }
+        };
+
+        let currentQuestion = 0;
+        let scores = {};
+
+        function startQuiz() {
+            currentQuestion = 0;
+            scores = {};
+            document.getElementById('page-home').classList.remove('active');
+            document.getElementById('page-quiz').classList.add('active');
+            document.getElementById('status-text').innerText = '[STATUS: RUNNING]';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('q-category').innerText = q.category;
+            document.getElementById('q-counter').innerText = `0${currentQuestion + 1} / 05`;
+            document.getElementById('q-title-text').innerText = q.title;
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<span class="option-tag">[0${index + 1}]</span> <span>${opt.text}</span>`;
+                btn.onclick = () => selectOption(opt.type);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(type) {
+            scores[type] = (scores[type] || 0) + 1;
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('page-quiz').classList.remove('active');
+            document.getElementById('page-result').classList.add('active');
+            document.getElementById('status-text').innerText = '[STATUS: COMPLETE]';
+
+            let bestType = "mochi-1";
+            let maxScore = -1;
+            for (let type in scores) {
+                if (scores[type] > maxScore) {
+                    maxScore = scores[type];
+                    bestType = type;
+                }
+            }
+
+            const result = mochiTypes[bestType];
+            document.getElementById('res-name').innerText = result.name;
+            document.getElementById('res-desc').innerText = result.desc;
+            document.getElementById('res-quote').innerText = result.quote;
+
+            const tagsContainer = document.getElementById('res-tags');
+            tagsContainer.innerHTML = '';
+            result.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'tag';
+                span.innerText = tag;
+                tagsContainer.appendChild(span);
+            });
+        }
+
+        function restartQuiz() {
+            document.getElementById('page-result').classList.remove('active');
+            document.getElementById('page-home').classList.add('active');
+            document.getElementById('status-text').innerText = '[STATUS: READY]';
+        }
+    </script>
+</body>
+</html>
